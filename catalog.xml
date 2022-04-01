@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/D:/Documents/EPSI/B3/Semestre2/WebService/Projet/TPvelomag/../../velomag/velomag.xsd" uri="xml-resources/jaxb/velomag/velomag.xsd"/>
+</catalog>
