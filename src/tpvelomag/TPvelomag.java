@@ -24,13 +24,18 @@ public class TPvelomag {
         int nbPlacesTotal = 0;
         
         // on met des coordonnées proches des coordonnees de 009 Observatoire la="43.606081" lg="3.876931"
-        Si closestSi = new Si();
-        Si closestAndDisponibleSi = new Si();
+        
         double notreLongitude = 3.876932;
         double notreLatitude = 43.606082;
+        
+        Si closestSi = new Si();
         closestSi.setLa(new BigDecimal(notreLatitude));
         closestSi.setLg(new BigDecimal(notreLongitude));
         double distanceClosestStation = distance(notreLatitude, si.get(0).getLa().doubleValue(), notreLongitude, si.get(0).getLg().doubleValue());
+        
+        Si closestAndDisponibleSi = new Si();
+        closestAndDisponibleSi.setLa(new BigDecimal(notreLatitude));
+        closestAndDisponibleSi.setLg(new BigDecimal(notreLongitude));
 
         
         for(int i =0; i < si.size(); i++){
@@ -50,7 +55,7 @@ public class TPvelomag {
             
             // station la plus proche
             double distanceCurrentStation = distance(notreLatitude, currentStation.getLa().doubleValue(), notreLongitude, currentStation.getLg().doubleValue());
-            System.out.println("\tCette station est à " + distanceCurrentStation + " mètres de vous");
+            System.out.println("\tCette station est à " + (int)distanceCurrentStation + " mètres de vous");
             if(distanceCurrentStation < distanceClosestStation){
                 closestSi = currentStation;
                 distanceClosestStation = distanceCurrentStation;
@@ -71,8 +76,11 @@ public class TPvelomag {
     
     public static void printStationInfo(Si station){
         System.out.println("\nStation : " + station.getNa());
-        System.out.println("\tPlace : " + station.getAv() + "/" + station.getTo());
-        System.out.println("\tNombre de places libres : " + station.getFr());
+        System.out.println("\tParking velo : " + station.getAv() + "/" + station.getTo());
+        if(station.getFr() > 0)
+            System.out.println("\tNombre de places libres : " + station.getFr());
+        else 
+            System.out.println("\tIl n'y a plus de places libres dans cette station");
     }
     
     // https://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude
